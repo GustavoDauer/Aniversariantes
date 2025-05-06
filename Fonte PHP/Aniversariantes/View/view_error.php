@@ -28,8 +28,7 @@
  */
 ?>
 <html>
-    <head>
-        <link rel="stylesheet" href="bootstrap.min.css">
+    <head>        
         <link rel="stylesheet" href="estilos.css">
     </head>
     <body>
@@ -46,7 +45,7 @@
         <div class="container mt-3">
             <hr>    
             <?php if (isset($e)) { ?>
-                <div class="alert alert-danger">
+                <div>
                     <strong>ERRO</strong><hr> <?= $e->getMessage() ?> <br><br>
                     <a href="#" onclick="showInformacoesAdicionais()">Informações técnicas</a>
                     <div id="informacoesAdicionais" style="display: none;">

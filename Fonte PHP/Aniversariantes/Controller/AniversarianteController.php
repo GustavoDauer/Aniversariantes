@@ -34,12 +34,14 @@ class AniversarianteController {
 
     private $pessoaDAO;         // DAO instance for database operations      
     private $datasheet;         // Datasheet import from SiCaPEx
+    private $mes;               // Exibir aniversariantes do mês especificado
 
     /**
      * Responsible to receive all input form data
      */
     public function getFormData() {
-        $this->datasheet = $_FILES["planilhaPessoas"];
+        $this->datasheet = isset($_FILES["planilhaPessoas"]) ? $_FILES["planilhaPessoas"] : "";
+        $this->mes = !empty(filter_input(INPUT_GET, "mes", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_SANITIZE_ADD_SLASHES)) ? filter_input(INPUT_GET, "mes", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_SANITIZE_ADD_SLASHES) : "";
     }
 
     /**
@@ -47,8 +49,15 @@ class AniversarianteController {
      */
     public function getAllList() {
         try {
+            $this->getFormData();
             $this->pessoaDAO = new PessoaDAO();
-            $objectList = $this->pessoaDAO->getAllList();
+            $pessoaDAO = $this->pessoaDAO;
+            $mes = $this->mes;
+            $mes = empty($mes) ? date('m') : format($mes);
+            $mesAnterior = anterior($mes);
+            $mesPosterior = posterior($mes);
+            $hoje = new DateTime();
+            $pessoaList = $pessoaDAO->getByMesList($mes);
             require_once '../View/view_aniversariantes.php';
         } catch (Exception $e) {
             require_once '../View/view_error.php';
@@ -74,7 +83,7 @@ class AniversarianteController {
         $result = "";
         $planilha = $this->datasheet;
         $pessoaDAO = new PessoaDAO();
-        $row = 1;        
+        $row = 1;
         if (($handle = fopen($planilha['tmp_name'], "r")) !== false) {
             while (($data = fgetcsv($handle, 1000, ",")) !== false) {
                 if ($row <= 2) {
@@ -91,7 +100,7 @@ class AniversarianteController {
                             $nomeGuerraCol === "NOME_GUERRA" &&
                             $dataNascimentoCol === "DT_NASCIMENTO"
                     ) {
-                        $row++;                        
+                        $row++;
                         $pessoaDAO->deleteAll(); // Caso as colunas estejam corretas, deleta todos registros do banco para novos cadastros atualizados
                         continue;
                     } else {
@@ -115,7 +124,7 @@ class AniversarianteController {
             }
             $result .= "<br>";
         }
-        fclose($handle);        
+        fclose($handle);
         require_once '../View/view_admin.php';
     }
 }
