@@ -8,6 +8,7 @@ GRANT ALL PRIVILEGES ON aniversariantes . * TO 'aniversariantes'@'localhost';
 FLUSH PRIVILEGES;
 
 Crie o arquivo aniversariantes.ini para conexão ao banco de dados com os seguintes dados:
+
 [database]
 
 servername = localhost
