@@ -69,7 +69,7 @@ $botao = "font-size: 52px; font-weight: bold; font-family: sans-serif; text-alig
 <?php if (is_array($pessoaList)) { ?> 
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-            <td style="<?= $botao ?>"><a href="view_aniversariantes.php?mes=<?= $mesAnterior ?>" style="text-decoration: none; color: darkgreen;"><</a></td>
+            <td style="<?= $botao ?>"><a href="../View/view_aniversariantes.php?mes=<?= $mesAnterior ?>" style="text-decoration: none; color: darkgreen;"><</a></td>
             <td>
                 <div align="center">
                     <ul style="display: flex; flex-wrap: wrap; list-style-type: none; margin: 0; padding: 14px; width: 800px;">
@@ -100,7 +100,7 @@ $botao = "font-size: 52px; font-weight: bold; font-family: sans-serif; text-alig
                     </ul>
                 </div>
             </td>
-            <td style="<?= $botao ?>"><a href="view_aniversariantes.php?mes=<?= $mesPosterior ?>" style="text-decoration: none; color: darkgreen;">></a></td>
+            <td style="<?= $botao ?>"><a href="../View/view_aniversariantes.php?mes=<?= $mesPosterior ?>" style="text-decoration: none; color: darkgreen;">></a></td>
         </tr>
     </table>
 <?php } ?>
