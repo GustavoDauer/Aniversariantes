@@ -9,9 +9,13 @@ FLUSH PRIVILEGES;
 
 Crie o arquivo aniversariantes.ini para conexão ao banco de dados com os seguintes dados:
 [database]
+
 servername = localhost
+
 username = aniversariantes
+
 password = senha
+
 dbname = aniversariantes
 
 Crie o banco de dados executando o script Aniversariantes/Projeto/BD/Aniversariantes.sql
